@@ -6,7 +6,7 @@
   <title>東京自由行 2026</title>
   <link rel="manifest" href="manifest.json">
   <!-- 給 iOS (iPhone) 專用的 APP 主畫面圖示 -->
-<link rel="apple-touch-icon" href="./images.jpg">
+<link rel="apple-touch-icon" href="./pikachu.jpg">
 <!-- 讓 iOS 狀態列呈現乾淨的背景 -->
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="style.css">
@@ -657,5 +657,10 @@
   </main>
 
   <script src="script.js"></script>
+  <!-- 圖片放大專用彈出視窗 -->
+    <div id="image-modal" class="image-modal" style="display: none;">
+      <span class="close-modal">&times;</span>
+      <img id="enlarged-img" src="">
+    </div>
 </body>
 </html>

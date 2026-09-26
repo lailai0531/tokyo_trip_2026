@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 儲存/更新按鈕點擊事件
   saveBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    
+
     const file = photoInput.files[0];
     const name = nameInput.value;
     const price = priceInput.value;
@@ -120,6 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `;
           gallery.appendChild(div);
+          // 綁定點擊圖片放大功能
+          const imgElement = div.querySelector('img');
+          imgElement.addEventListener('click', function() {
+            document.getElementById('enlarged-img').src = item.image;
+            document.getElementById('image-modal').style.display = 'flex';
+          });
         });
 
         // 綁定所有「編輯」按鈕的功能
@@ -171,6 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // 點擊放大視窗的任何地方(或X)即可關閉
+  const imageModal = document.getElementById('image-modal');
+  if (imageModal) {
+    imageModal.addEventListener('click', function() {
+      this.style.display = 'none';
+    });
+  }
+
   // 清空表單與重置狀態
   function resetForm() {
     photoInput.value = '';
@@ -179,4 +193,5 @@ document.addEventListener('DOMContentLoaded', () => {
     editingId = null;
     saveBtn.textContent = "儲存紀錄";
   }
+  
 });
