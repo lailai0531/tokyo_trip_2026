@@ -2,8 +2,8 @@
 :root {
   --bg-color: #f0f6cad7;       /* 象牙白背景 */
   --text-color: #5c5c5c;     /* 柔和的深灰色文字 */
-  --primary-color: #d77c0d9b;  /* 櫻花粉 (按鈕啟用色) */
-  --secondary-color: #f3dd36b9;/* 鼠尾草綠 (按鈕預設色) */
+  --primary-color: #d77c0d9b;  /* 按鈕啟用色 */
+  --secondary-color: #f3dd36b9;/* 按鈕預設色*/
   --third-color: #f7f1d3;        /* 停留時兼備景色*/
   --card-bg: #f1e3a3eb;
   --header-bg: hsl(43, 97%, 42%);
@@ -33,10 +33,11 @@ header h1 {
 .tabs {
   display: flex;
   overflow-x: auto;
-  padding: 15px;
+  white-space: nowrap;
+  padding: 10px;
   gap: 10px;
   /* 隱藏捲軸但可滑動 */
-  scrollbar-width: none; 
+  scrollbar-width: touch; 
 }
 .tabs::-webkit-scrollbar {
   display: none;
@@ -366,4 +367,44 @@ summary::marker { display: none; }
   align-items: center;
   justify-content: center; /* 讓膠囊標籤在卡片寬度內水平置中 */
   margin: 5px 0 20px 0;    /* 移除原本往左拉的負數數值 */
+}
+
+/* === 圖片放大視窗樣式 === */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-modal img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;/* 確保圖片維持比例縮放，完整顯示 */
+  border-radius: 8px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;     /* 確保 X 永遠在圖片的最高層級，不會被蓋住 */
+  /* 加一點文字陰影，避免圖片太白時看不到 X */
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.8); 
+}
+
+/* 提示使用者圖片可以點擊 */
+.gallery-item img {
+  cursor: zoom-in;
 }
