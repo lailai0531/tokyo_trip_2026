@@ -1,0 +1,21 @@
+{
+  "name": "東京自由行 2026",
+  "short_name": "東京行",
+  "description": "五天四夜東京旅遊行程與戰利品紀錄",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#faf9f6",
+  "theme_color": "#e8c7c8",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

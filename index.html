@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>東京自由行 2026</title>
+  <link rel="manifest" href="manifest.json">
+  <!-- 給 iOS (iPhone) 專用的 APP 主畫面圖示 -->
+<link rel="apple-touch-icon" href="./images.jpg">
+<!-- 讓 iOS 狀態列呈現乾淨的背景 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>✈️ 東京自由行</h1>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-target="tab-1">航班</button>
+    <button class="tab-btn" data-target="tab-2">9/30</button>
+    <button class="tab-btn" data-target="tab-3">10/1</button>
+    <button class="tab-btn" data-target="tab-4">10/2</button>
+    <button class="tab-btn" data-target="tab-5">10/3</button>
+    <button class="tab-btn" data-target="tab-6">10/4</button>
+    <button class="tab-btn" data-target="tab-7">戰利品</button>
+  </nav>
+
+  <main>
+    <!-- 分頁 1：機票與高鐵 -->
+    <section id="tab-1" class="tab-content active">
+      <div class="card">
+        <h3>🚄 高鐵/機捷 (9/29)</h3>
+        <p>20:41 台中烏日 ➔ 21:36 桃園站</p>
+        <p>22:18 高鐵桃園站(A18) ➔ 22:51 機場第一航廈(A12)</p>
+        <p>機捷耗時：19分鐘 (班次 22:32/22:47/23:02)</p>
+      </div>
+      <div class="card">
+        <h3>🛫 去程航班 (9/30)</h3>
+        <p>樂桃航空 A320-212</p>
+        <p>02:00 桃園機場 T1 ➔ 06:30 成田機場 T1</p>
+      </div>
+      <div class="card">
+        <h3>🛬 回程航班 (10/4)</h3>
+        <p>22:10 成田機場 T1 起飛</p>
+      </div>
+    </section>
+
+    <!-- 分頁 2：9/30 行程 -->
+    <section id="tab-2" class="tab-content">
+      <div class="timeline-container">
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">06:30</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">09:36</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>成田機場 T1</h3>
+                <span class="stay-duration">⏱️ 停留 3 小時</span>
+              </div>
+              <a href="https://maps.google.com/?q=成田機場T1" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>入境跟鐵道路牌走，找藍色機台點 QR Code 兌換 Skyliner</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 Skyliner (51分鐘)</span></div>
+        
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">10:35</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">11:35</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>APA 上野站前飯店</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時</span>
+              </div>
+              <a href="https://maps.google.com/?q=上野站前APA飯店" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>寄放行李</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚶 走路 6分鐘</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">11:45</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">14:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>かに道楽上野店</h3>
+                <span class="stay-duration">⏱️ 停留 2 小時 15 分</span>
+              </div>
+              <a href="https://maps.google.com/?q=かに道楽上野店" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>預約 12:00 午間套餐</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 日比谷線/銀座線 ¥180 (20分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">14:20</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">15:50</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>小網神社</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時 30 分</span>
+              </div>
+              <a href="https://maps.google.com/?q=小網神社" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>參拜神社、洗錢、買御守</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 淺草線/走路 (15分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">16:10</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">17:10</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>寶可夢中心東京店 DX</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時</span>
+              </div>
+              <a href="https://maps.google.com/?q=寶可夢中心東京店 DX" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚶 走路 13分鐘</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">17:30</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">18:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>東京車站</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時</span>
+              </div>
+              <a href="https://maps.google.com/?q=東京車站" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>東京一番街、Be! FRUITS SANDWICH</p></div>
+            </details>
+          </div>
+        </div>
+
+    </section>
+
+    <!-- 分頁 3：10/1 行程 -->
+    <section id="tab-3" class="tab-content">
+      <div class="timeline-container">
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">08:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+                <div class="card-header">
+                  <div class="card-title-area">
+                    <h3>APA 上野站前飯店</h3>
+                  </div>
+                  <a href="https://maps.google.com/?q=上野站前APA飯店" target="_blank" class="map-btn">📍 地圖</a>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-transit"><span>🚇 山手線 ¥260(34分鐘)/<br>大江戶線 ¥220(26分鐘)</span></div>
+          <div class="timeline-node">
+            <div class="timeline-time">
+              <div class="time-group"><span class="val">09:10</span><span class="lbl">抵達</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>新宿</h3>
+              </div>
+              <a href="https://maps.google.com/?q=新宿車站" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>
+                	9:16 3號月台 特急 高尾山口方向<br>
+                  9:24 3號月台 急行 京王八王子方向<br>
+                  調布站Chōfu下車 同站轉乘<br>
+                  9:38 1號月台 區間急行 橋本方向<br>
+                  9:44 1號月台 區間急行 橋本方向<br>
+                  9:52 1號月台 普通車 京王多摩中心</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 京王線 ¥320 (28分鐘)</span></div>
+        
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">10:00</span><span class="lbl">抵達</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>京王讀賣樂園站</h3>
+              </div>
+               <a href="https://maps.google.com/?q=Keiō-yomiuri-land Station" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚠 纜車來回¥500 (15分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">10:20</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">19:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>讀賣樂園 (寶可夢樂園)</h3>
+                <span class="stay-duration">⏱️ 停留 8 小時 40 分</span>
+              </div>
+               <a href="https://maps.google.com/?q=讀賣樂園" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>10:45搶整理券，11:00開園。<br>不可付現、帶食物。<br>16:30泡泡嘉年華，18:30夜間嘉年華，15:00-16:00森林</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚠 纜車 + 京王線回新宿 (36分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">20:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">21:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>牛舌荒 (新宿)</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時 30 分</span>
+              </div>
+              <a href="https://maps.google.com/?q=牛舌荒 新宿" target="_blank" class="map-btn">📍 地圖</a>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>預約 20:30 兩位<br>［予約番号］PL788541187801421</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分頁 4：10/2 行程 -->
+    <section id="tab-4" class="tab-content">
+      <div class="timeline-container">
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">08:25</span><span class="lbl">出發</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>APA 上野站前飯店</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 宇都宮線轉橫須賀線 ¥1034</span></div>
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">09:30</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">10:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>鎌倉站 (小町通/八幡宮)</h3>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>ともや 鎌倉小町店<br>豐島屋 鎌倉本店</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 江之電 ¥200 (21分鐘)</span></div>
+        
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">11:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">12:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>大佛殿 + 長谷寺</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時 30 分</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>大佛殿¥300，長谷寺¥400</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 江之電 ¥220 (18分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">13:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">13:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>七里濱 / 鎌倉高校前</h3>
+                <span class="stay-duration">⏱️ 停留 30 分鐘</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>邊走邊拍照</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 江之電 ¥200 (14分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">14:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">15:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>すき焼き ちかよ</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時</span>
+              </div>
+              <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>11:00–15:00/17:00–21:00<br>L.O. 14:30</p></div>
+            </details>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚶 走路/公車 (14分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">15:30</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">17:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>江之島</h3>
+                <span class="stay-duration">⏱️ 停留 2 小時</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>三段手扶梯¥500，邊津宮洗錢，見晴亭看日落</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 走路+單軌+JR ¥590 (35分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">19:30</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">20:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>寶可夢中心橫濱</h3>
+                <span class="stay-duration">⏱️ 停留 30 分鐘</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 港未來線 ¥200 (17分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">20:20</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">21:20</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>橫濱港區 (皮卡丘郵筒/纜車)</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>纜車到22:00(單程¥1000)。21:20 櫻木町搭車回上野(¥620)</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分頁 5：10/3 行程 -->
+    <section id="tab-5" class="tab-content">
+      <div class="timeline-container">
+        <!-- 每日起點：上野 -->
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">09:20</span><span class="lbl">出發</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>APA 上野站前飯店</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 山手線 ¥206 (36分鐘)</span></div>
+        <!-- 下面接著原本的「池袋 太陽城」節點... -->
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">10:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">12:30</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>池袋 太陽城</h3>
+                <span class="stay-duration">⏱️ 停留 2 小時 30 分</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>最大扭蛋店、寶可夢Mega Tokyo、逛街與午餐</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 副都心線 ¥209 (24分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">13:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">14:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>明治神宮</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>從北參道鳥居進入</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚶 走路至原宿</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">14:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">19:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>原宿 + 表參道 + 澀谷</h3>
+                <span class="stay-duration">⏱️ 停留 5 小時</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>逛街4.5小時。Tas Yard、澀谷LOFT、寶可夢中心澀谷店</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 電車 (24分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">19:30</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">20:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>東京都廳都民廣場</h3>
+                <span class="stay-duration">⏱️ 停留 30 分鐘</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>20:00-20:15 有寶可夢光影秀</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 前往新宿市區</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">20:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">22:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>新宿 晚餐/逛街</h3>
+                <span class="stay-duration">⏱️ 停留 2 小時</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>豚珍館、Don Quijote。吃完搭車回上野</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分頁 6：10/4 行程 -->
+    <section id="tab-6" class="tab-content">
+      <div class="timeline-container">
+        <!-- 每日起點：上野 -->
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">08:10</span><span class="lbl">出發</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>APA 上野站前飯店</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 大江戶線 ¥280 (36分鐘)</span></div>
+        <!-- 下面接著原本的「赤羽橋」節點... -->
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">08:50</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">11:00</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>赤羽橋 (東京鐵塔)</h3>
+                <span class="stay-duration">⏱️ 停留 2 小時 10 分</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>先去芝公園，再往大門方向走</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 淺草線 ¥220 (33分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">11:50</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">13:20</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>晴空塔</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時 30 分</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 淺草線 ¥180 (7分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">13:40</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">15:40</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>淺草</h3>
+                <span class="stay-duration">⏱️ 停留 2 小時</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>仲見世商店街、Misojyu 飯糰店</p></div>
+            </details>
+          </div>
+        </div>
+        <div class="timeline-transit"><span>🚇 銀座線 ¥180 (13分鐘)</span></div>
+
+        <div class="timeline-node">
+          <div class="timeline-time">
+            <div class="time-group"><span class="val">16:00</span><span class="lbl">抵達</span></div>
+            <div class="time-group"><span class="val">17:40</span><span class="lbl">離開</span></div>
+          </div>
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-title-area">
+                <h3>上野 (拿行李)</h3>
+                <span class="stay-duration">⏱️ 停留 1 小時 40 分</span>
+              </div>
+            </div>
+            <details class="card-notes">
+              <summary>備註資訊</summary>
+              <div class="notes-content"><p>17:40 搭 Skyliner 前往機場</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分頁 7：戰利品紀錄 -->
+    <section id="tab-7" class="tab-content">
+      <div class="form-card">
+        <h3>🛍️ 新增購買紀錄</h3>
+        <label for="photo-upload" class="custom-file-upload" id="photo-label">
+          📸 拍攝帳單或戰利品
+        </label>
+        <input type="file" id="photo-upload" accept="image/*" capture="environment">
+        
+        <input type="text" id="item-name" placeholder="物品名稱 (例：小網神社御守)">
+        <input type="number" id="item-price" placeholder="價格">
+        <button id="save-btn">儲存紀錄</button>
+      </div>
+      <div id="gallery" class="gallery-grid"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

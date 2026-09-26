@@ -1,0 +1,369 @@
+/* 設定全域變數與淺色柔和色系 */
+:root {
+  --bg-color: #f0f6cad7;       /* 象牙白背景 */
+  --text-color: #5c5c5c;     /* 柔和的深灰色文字 */
+  --primary-color: #d77c0d9b;  /* 櫻花粉 (按鈕啟用色) */
+  --secondary-color: #f3dd36b9;/* 鼠尾草綠 (按鈕預設色) */
+  --third-color: #f7f1d3;        /* 停留時兼備景色*/
+  --card-bg: #f1e3a3eb;
+  --header-bg: hsl(43, 97%, 42%);
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+header {
+  text-align: center;
+  padding: 15px 0;
+  background-color: var(--header-bg);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #f8fbdf;
+}
+
+/* 頂部分頁按鈕 (橫向滑動) */
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  padding: 15px;
+  gap: 10px;
+  /* 隱藏捲軸但可滑動 */
+  scrollbar-width: none; 
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  flex: 0 0 auto; /* 讓按鈕保持原本大小不被壓縮 */
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px; /* 圓角直方形 */
+  background-color: var(--secondary-color);
+  color: #5c5c5c;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* 分頁內容切換 */
+.tab-content {
+  display: none;
+  padding: 15px;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* 卡片與展開式選單樣式 */
+.card, .trip-item {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* 行程展開標題區 */
+summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none; /* 隱藏預設三角形 */
+}
+summary::marker { display: none; }
+
+.summary-left .time {
+  font-weight: bold;
+  color: #a89f91;
+  margin-right: 10px;
+}
+
+.map-btn {
+  background-color: var(--secondary-color);
+  color: #5c5c5c;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.details-body {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #eee;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* 第 7 頁記帳表單 */
+.form-card input, .form-card button {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+.form-card button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+/* 戰利品照片牆 */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.gallery-item {
+  background: white;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.gallery-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.gallery-item p {
+  margin: 5px 0 0;
+  font-size: 0.8rem;
+  text-align: center;
+}
+/* 戰利品卡片操作按鈕 */
+.item-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  gap: 5px;
+}
+.item-actions button {
+  flex: 1;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.edit-btn {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+.delete-btn {
+  background-color: #fca7a7; /* 柔和的紅色 */
+  color: white;
+}
+/* 隱藏原生的檔案上傳按鈕 */
+#photo-upload {
+  display: none;
+}
+
+/* 自訂帳單照片上傳區塊樣式 */
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 2px dashed var(--primary-color);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* 點擊時的視覺回饋 */
+.custom-file-upload:active {
+  background-color: var(--secondary-color);
+}
+
+/* 2. 景點卡片頂部：停留時間與右側地圖 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.card-title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.card-title-area h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #4a4a4a;
+}
+.stay-duration {
+  font-size: 0.75rem;
+  background-color: var(--third-color);
+  color: #5c5c5c;
+  padding: 3px 8px;
+  border-radius: 12px;
+  width: fit-content;
+  font-weight: bold;
+}
+.map-btn {
+  text-decoration: none;
+  background-color: #f4f4f4;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  margin-left: 10px;
+  flex-shrink: 0; /* 確保地圖按鈕不會被過長的標題擠壓 */
+}
+
+/* 3. 下拉式備註選單 */
+.card-notes {
+  margin-top: 12px;
+  border-top: 1px dashed #eee;
+  padding-top: 8px;
+}
+.card-notes summary {
+  font-size: 0.85rem;
+  color: #5c5c5c;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none; /* 隱藏原生三角形 */
+  display: flex;
+  align-items: center;
+}
+.card-notes summary::-webkit-details-marker {
+  display: none;
+}
+.card-notes summary::before {
+  content: '▶';
+  font-size: 0.7rem;
+  margin-right: 6px;
+  color: var(--primary-color);
+  transition: transform 0.2s ease;
+}
+.card-notes[open] summary::before {
+  transform: rotate(90deg); /* 展開時箭頭轉向 */
+}
+.notes-content {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.5;
+}
+/* 1. 時間軸整體容器與軸線 */
+.timeline-container {
+  position: relative;
+  padding: 10px 15px 20px 90px; /* 給予左側 90px 的充裕空間 */
+}
+.timeline-container::before {
+  display: none;
+}
+
+.timeline-node {
+  position: relative;
+  margin-bottom: 10px;
+}
+.timeline-node:has(.time-group:nth-child(2)) .timeline-card {
+  min-height:68px; /* 加大高度，讓兩顆圓點有足夠空間拉開，顯示連線 */
+}
+
+/* 2. 左側時間大區塊 (改為 flex 排版以容納多個時間) */
+/* 左側時間大區塊容器 */
+.timeline-time {
+  position: absolute;
+  left: -90px;
+  width: 60px;
+  top: 12px;    /* 對齊卡片上方 */
+  bottom: 12px; /* 關鍵！綁定底部，讓時間區塊的高度跟著卡片一起伸縮 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 自動將抵達與離開時間推向最上與最下 */
+  z-index: 1;
+}
+
+/* 抵達與離開兩顆圓點之間的專屬連線 */
+.timeline-time::before {
+  content: '';
+  position: absolute;
+  right: -11px;    /* 微調左右偏移量，修正像素誤差以精準對齊圓心 */
+  top: 1px;       /* 增加頂部距離，讓線條起點往下縮並藏在第一顆圓點背後 */
+  bottom: 32px;    /* 增加底部距離，讓線條終點往上縮並藏在第二顆圓點背後 */
+  width: 2px;      /* 將線條改為偶數寬度 2px，徹底解決置中偏移問題 */
+  background-color: var(--secondary-color);
+  z-index: -1;     /* 確保這條線永遠墊在圓點的最下方 */
+}
+.timeline-time:has(.time-group:only-child)::before {
+  display: none;
+}
+
+/* 3. 個別時間節點與專屬原點 */
+.time-group {
+  position: relative;
+  text-align: right;
+}
+.time-group .val {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #7b6d6f;
+  line-height: 1.1;
+}
+.time-group .lbl {
+  display: block;
+  font-size: 0.75rem;
+  color: #a89f91;
+  margin-top: 4px;
+}
+/* 讓每個時間點都有自己的原點 */
+.time-group::after {
+  content: '';
+  position: absolute;
+  right: -17px; /* 往右推 17px，剛好精準落在軸線上 */
+  top: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--secondary-color);
+  z-index: 2;
+}
+
+/* 4. 卡片與移除舊版單一原點 */
+.timeline-card {
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  padding: 12px 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  position: relative;
+}
+.timeline-card::before {
+  display: none; /* 隱藏舊版卡片上的原點 */
+}
+
+/* 5. 微調交通方式對齊軸線 */
+.timeline-transit {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 讓膠囊標籤在卡片寬度內水平置中 */
+  margin: 5px 0 20px 0;    /* 移除原本往左拉的負數數值 */
+}
