@@ -20,10 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameInput = document.getElementById('item-name');
   const priceInput = document.getElementById('item-price');
   const gallery = document.getElementById('gallery');
+
+  const photoLabel = document.querySelector('label[for="photo-upload"]');
+
   photoInput.addEventListener('change', () => {
     if (photoInput.files.length > 0) {
-      photoLabel.textContent = "✅ 已拍攝帳單 (點擊重拍)";
-      photoLabel.style.backgroundColor = "var(--secondary-color)";
+      // 確保 photoLabel 有抓到才修改，避免報錯
+      if (photoLabel) {
+        photoLabel.textContent = "✅ 已拍攝照片 (點擊重拍)";
+        photoLabel.style.backgroundColor = "var(--secondary-color)";
+      }
     }
   });
 
@@ -33,7 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGallery();
 
   // 儲存/更新按鈕點擊事件
-  saveBtn.addEventListener('click', () => {
+  saveBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
     const file = photoInput.files[0];
     const name = nameInput.value;
     const price = priceInput.value;
