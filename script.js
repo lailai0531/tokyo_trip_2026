@@ -22,18 +22,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const gallery = document.getElementById('gallery');
 
   const photoLabel = document.querySelector('label[for="photo-upload"]');
+  const previewContainer = document.getElementById('preview-container');
+  const previewImg = document.getElementById('preview-img');
 
-  photoInput.addEventListener('change', () => {
-    if (photoInput.files.length > 0) {
-      // 確保 photoLabel 有抓到才修改，避免報錯
-      if (photoLabel) {
-        photoLabel.textContent = "✅ 已拍攝照片 (點擊重拍)";
-        photoLabel.style.backgroundColor = "var(--secondary-color)";
-      }
+  photoInput.addEventListener('change',function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      // 讀取檔案轉為 Base64
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        currentBase64Image = event.target.result; // 存入暫存變數
+        
+        // 顯示預覽畫面
+        if (previewContainer && previewImg) {
+          previewImg.src = currentBase64Image;
+          previewContainer.style.display = 'block';
+        }
+        
+        // 更新按鈕狀態
+        if (photoLabel) {
+          photoLabel.textContent = "✅ 照片已載入 (點擊可重拍)";
+          photoLabel.style.backgroundColor = "var(--secondary-color)";
+        }
+      };
+      reader.readAsDataURL(file); // 啟動讀取
     }
   });
 
   let editingId = null; // 用來記錄目前正在編輯哪一筆資料 (null 代表新增模式)
+  let currentBase64Image = null; // ★ 新增：用來暫存剛拍好的照片資料
 
   // 初始化讀取歷史紀錄
   loadGallery();
@@ -42,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
   saveBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
-    const file = photoInput.files[0];
     const name = nameInput.value;
     const price = priceInput.value;
 
@@ -52,22 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 新增模式下，必須要拍照/上傳照片
-    if (!editingId && !file) {
+    if (!editingId && !currentBase64Image) {
       alert("請拍攝或上傳戰利品照片！");
       return;
     }
 
-    if (file) {
-      // 若有新照片，將圖片轉為 Base64 後儲存
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        saveData(e.target.result, name, price);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      // 編輯模式且沒有換照片，直接更新文字
-      saveData(null, name, price);
-    }
+    saveData(currentBase64Image, name, price);
   });
 
   // 實際寫入資料庫的共用函數
@@ -86,8 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentList[itemIndex].image = base64Image;
           }
         }
-        editingId = null; // 結束編輯狀態
-        saveBtn.textContent = "儲存紀錄"; // 按鈕文字改回預設
       } else {
         // 新增模式：建立新資料
         const newItem = { id: Date.now(), image: base64Image, name: name, price: price };
@@ -101,6 +105,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }).catch(err => console.log(err));
   }
 
+  // ★ 3. 清空表單與重置狀態 (包含隱藏預覽圖)
+  function resetForm() {
+    photoInput.value = '';
+    nameInput.value = '';
+    priceInput.value = '';
+    editingId = null;
+    currentBase64Image = null; // 清空照片暫存
+    saveBtn.textContent = "儲存紀錄";
+
+    // 恢復拍照按鈕預設樣式
+    if (photoLabel) {
+      photoLabel.textContent = "📷 拍攝或上傳帳單";
+      photoLabel.style.backgroundColor = "";
+    }
+    // 隱藏預覽區塊
+    if (previewContainer) {
+      previewContainer.style.display = 'none';
+      previewImg.src = "";
+    }
+  }
   // 讀取並渲染照片牆
   function loadGallery() {
     localforage.getItem('shoppingList').then(list => {
@@ -175,23 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadGallery();
       });
     }
-  }
-
-  // 點擊放大視窗的任何地方(或X)即可關閉
-  const imageModal = document.getElementById('image-modal');
-  if (imageModal) {
-    imageModal.addEventListener('click', function() {
-      this.style.display = 'none';
-    });
-  }
-
-  // 清空表單與重置狀態
-  function resetForm() {
-    photoInput.value = '';
-    nameInput.value = '';
-    priceInput.value = '';
-    editingId = null;
-    saveBtn.textContent = "儲存紀錄";
   }
   
 });

@@ -300,7 +300,7 @@
               <div class="card-title-area">
                 <h3>鎌倉站 (小町通/八幡宮)</h3>
               </div>
-              <a href="https://maps.google.com/?q=小町通" target="_blank" class="map-btn">📍 地圖</a>
+              <a href="https://maps.app.goo.gl/c7XqqHw99jkJLku47" target="_blank" class="map-btn">📍 地圖</a>
             </div>
             <details class="card-notes">
               <summary>備註資訊</summary>
@@ -485,7 +485,7 @@
                 <h3>明治神宮</h3>
                 <span class="stay-duration">⏱️ 停留 1 小時</span>
               </div>
-               <a href="https://maps.google.com/?q=明治神宮北參道路口" target="_blank" class="map-btn">📍 地圖</a>
+               <a href="https://maps.app.goo.gl/GNC3hzWiQHw7LN7a9" target="_blank" class="map-btn">📍 地圖</a>
             </div>
             <details class="card-notes">
               <summary>備註資訊</summary>
@@ -664,11 +664,18 @@
         <label for="photo-upload" class="custom-file-upload" id="photo-label">
           📸 拍攝帳單或戰利品
         </label>
-        <input type="file" id="photo-upload" accept="image/*" capture="environment">
-        
-        <input type="text" id="item-name" placeholder="物品名稱 (例：小網神社御守)">
-        <input type="number" id="item-price" placeholder="價格">
-        <button id="save-btn">儲存紀錄</button>
+        <!-- ★ 新增：照片預覽區塊 (預設隱藏) -->
+        <div id="preview-container" style="display: none; text-align: center; margin: 15px 0;">
+          <img id="preview-img" src="" alt="照片預覽" style="max-width: 100%; max-height: 250px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">👆 預覽：請確認照片清晰再儲存</p>
+        </div>
+
+        <!-- 輸入區塊 -->
+        <input type="text" id="item-name" placeholder="請輸入戰利品名稱">
+        <input type="number" id="item-price" placeholder="請輸入價格 (日幣)">
+
+        <!-- ★ 修改：務必加上 type="button" -->
+        <button type="button" id="save-btn">儲存紀錄</button>
       </div>
       <div id="gallery" class="gallery-grid"></div>
     </section>
