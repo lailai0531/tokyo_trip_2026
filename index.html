@@ -683,10 +683,10 @@
   </main>
 
   <script src="script.js"></script>
-  <!-- 圖片放大專用彈出視窗 -->
-    <div id="image-modal" class="image-modal" style="display: none;">
+  <!-- 圖片放大專用彈出視窗 (加入終極暴力關閉指令) -->
+    <div id="image-modal" class="image-modal" style="display: none;" onclick="this.style.display='none'">
       <span class="close-modal">&times;</span>
-      <img id="enlarged-img" src="">
+      <img id="enlarged-img" src="" onclick="event.stopPropagation()">
     </div>
 </body>
 </html>
