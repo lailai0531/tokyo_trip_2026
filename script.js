@@ -3,7 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
+  // 檢查手機裡有沒有記住上一次的分頁？如果有，就載入那個分頁；沒有就預設為 tab-1
+  const savedTab = localStorage.getItem('lastActiveTab') || 'tab-1';
+
   tabBtns.forEach(btn => {
+    // 網頁剛載入時，自動幫你切換到記憶中的分頁
+    if (btn.getAttribute('data-target') === savedTab) {
+      btn.classList.add('active');
+      document.getElementById(savedTab).classList.add('active');
+      // 如果記住的是其他分頁，把導航列自動捲動過去，避免按鈕藏在畫面外
+      btn.scrollIntoView({ behavior: 'instant', inline: 'center' });
+    }
+
     btn.addEventListener('click', () => {
       tabBtns.forEach(b => b.classList.remove('active'));
       tabContents.forEach(c => c.classList.remove('active'));
@@ -11,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       const targetId = btn.getAttribute('data-target');
       document.getElementById(targetId).classList.add('active');
+
+      // ★ 每次切換分頁，就把這個分頁 ID 記在手機裡
+      localStorage.setItem('lastActiveTab', targetId);
     });
   });
 
