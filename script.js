@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ★ 關鍵修正：在套用記憶之前，先強制清除所有按鈕與內容的啟用狀態
   tabBtns.forEach(b => b.classList.remove('active'));
   tabContents.forEach(c => c.classList.remove('active'));
-  
+
   tabBtns.forEach(btn => {
     // 網頁剛載入時，自動幫你切換到記憶中的分頁
     if (btn.getAttribute('data-target') === savedTab) {
@@ -49,25 +49,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // 共用的照片處理函數 (無論是拍照還是選相簿，都走這裡)
   const processImage = function(e) {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        currentBase64Image = event.target.result;
-        // 顯示預覽畫面
-        if (previewContainer && previewImg) {
-          previewImg.src = currentBase64Image;
-          previewContainer.style.display = 'block';
-        }
-        // 改變兩個按鈕的樣式，提示使用者已成功載入
-        photoBtns.forEach(btn => {
-          btn.style.backgroundColor = "#d1d5a7"; // 變成稍微深一點的綠色
-        });
-      };
-      reader.readAsDataURL(file);
-    }
+    if (!file) return; // 如果使用者按取消，直接中斷，保留畫面上的舊照片
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      currentBase64Image = event.target.result;
+      if (previewContainer && previewImg) {
+        previewImg.src = currentBase64Image;
+        previewContainer.style.display = 'block';
+      }
+      photoBtns.forEach(btn => {
+        btn.style.backgroundColor = "#d1d5a7";
+      });
+    };
+    reader.readAsDataURL(file);
   };
-  if (cameraInput) cameraInput.addEventListener('change', processImage);
-  if (galleryInput) galleryInput.addEventListener('change', processImage);
+  // ★ 關鍵修正：在點擊(click)時先清空 value，確保每次 change 事件都會強制觸發
+  if (cameraInput) {
+    cameraInput.addEventListener('click', function() { this.value = ''; });
+    cameraInput.addEventListener('change', processImage);
+  }
+  if (galleryInput) {
+    galleryInput.addEventListener('click', function() { this.value = ''; });
+    galleryInput.addEventListener('change', processImage);
+  }
 
   let editingId = null; // 用來記錄目前正在編輯哪一筆資料 (null 代表新增模式)
   let currentBase64Image = null; // ★ 新增：用來暫存剛拍好的照片資料
@@ -191,16 +195,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 進入編輯模式
+  // 5. 進入編輯模式 (加入照片預覽還原功能)
   function editItem(id, list) {
     const item = list.find(i => i.id === id);
     if (item) {
       nameInput.value = item.name;
       priceInput.value = item.price;
       editingId = id;
-      saveBtn.textContent = "更新紀錄"; // 提示使用者現在是編輯狀態
+      saveBtn.textContent = "更新紀錄";
+
+      // ★ 新增：進入編輯模式時，把資料庫裡的舊照片顯示在預覽區
+      currentBase64Image = item.image || null; 
+      if (previewContainer && previewImg && currentBase64Image) {
+        previewImg.src = currentBase64Image;
+        previewContainer.style.display = 'block';
+        
+        photoBtns.forEach(btn => {
+          btn.style.backgroundColor = "#d1d5a7";
+        });
+      }
       
-      // 自動畫面滾動到最上面，方便編輯表單
       document.getElementById('tab-7').scrollIntoView({ behavior: 'smooth' });
     }
   }
