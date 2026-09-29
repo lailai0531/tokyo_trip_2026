@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 檢查手機裡有沒有記住上一次的分頁？如果有，就載入那個分頁；沒有就預設為 tab-1
   const savedTab = localStorage.getItem('lastActiveTab') || 'tab-1';
 
+  // ★ 關鍵修正：在套用記憶之前，先強制清除所有按鈕與內容的啟用狀態
+  tabBtns.forEach(b => b.classList.remove('active'));
+  tabContents.forEach(c => c.classList.remove('active'));
+  
   tabBtns.forEach(btn => {
     // 網頁剛載入時，自動幫你切換到記憶中的分頁
     if (btn.getAttribute('data-target') === savedTab) {
@@ -30,38 +34,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === 2. 戰利品紀錄邏輯 (支援新增、修改、刪除) ===
   const saveBtn = document.getElementById('save-btn');
-  const photoInput = document.getElementById('photo-upload');
   const nameInput = document.getElementById('item-name');
   const priceInput = document.getElementById('item-price');
   const gallery = document.getElementById('gallery');
 
-  const photoLabel = document.querySelector('label[for="photo-upload"]');
+ // 取代原本的 photoInput 與 photoLabel
+  const cameraInput = document.getElementById('photo-upload-camera');
+  const galleryInput = document.getElementById('photo-upload-gallery');
+  const photoBtns = document.querySelectorAll('.photo-btn');
+
   const previewContainer = document.getElementById('preview-container');
   const previewImg = document.getElementById('preview-img');
 
-  photoInput.addEventListener('change',function(e) {
+  // 共用的照片處理函數 (無論是拍照還是選相簿，都走這裡)
+  const processImage = function(e) {
     const file = e.target.files[0];
     if (file) {
-      // 讀取檔案轉為 Base64
       const reader = new FileReader();
       reader.onload = function(event) {
-        currentBase64Image = event.target.result; // 存入暫存變數
-        
+        currentBase64Image = event.target.result;
         // 顯示預覽畫面
         if (previewContainer && previewImg) {
           previewImg.src = currentBase64Image;
           previewContainer.style.display = 'block';
         }
-        
-        // 更新按鈕狀態
-        if (photoLabel) {
-          photoLabel.textContent = "✅ 照片已載入 (點擊可重拍)";
-          photoLabel.style.backgroundColor = "var(--secondary-color)";
-        }
+        // 改變兩個按鈕的樣式，提示使用者已成功載入
+        photoBtns.forEach(btn => {
+          btn.style.backgroundColor = "#d1d5a7"; // 變成稍微深一點的綠色
+        });
       };
-      reader.readAsDataURL(file); // 啟動讀取
+      reader.readAsDataURL(file);
     }
-  });
+  };
+  if (cameraInput) cameraInput.addEventListener('change', processImage);
+  if (galleryInput) galleryInput.addEventListener('change', processImage);
 
   let editingId = null; // 用來記錄目前正在編輯哪一筆資料 (null 代表新增模式)
   let currentBase64Image = null; // ★ 新增：用來暫存剛拍好的照片資料
@@ -119,19 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }).catch(err => console.log(err));
   }
 
-  // ★ 3. 清空表單與重置狀態 (包含隱藏預覽圖)
+  // 7. 清空表單與隱藏預覽
   function resetForm() {
-    photoInput.value = '';
+    if (cameraInput) cameraInput.value = '';
+    if (galleryInput) galleryInput.value = '';
     nameInput.value = '';
     priceInput.value = '';
     editingId = null;
-    currentBase64Image = null; // 清空照片暫存
+    currentBase64Image = null;
     saveBtn.textContent = "儲存紀錄";
-
-    // 恢復拍照按鈕預設樣式
-    if (photoLabel) {
-      photoLabel.textContent = "📷 拍攝或上傳帳單";
-      photoLabel.style.backgroundColor = "";
+    
+    // 恢復按鈕預設顏色
+    if (photoBtns) {
+      photoBtns.forEach(btn => btn.style.backgroundColor = "var(--secondary-color)");
     }
     // 隱藏預覽區塊
     if (previewContainer) {

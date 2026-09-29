@@ -661,7 +661,16 @@
     <section id="tab-7" class="tab-content">
       <div class="form-card">
         <h3>🛍️ 新增購買紀錄</h3>
-        <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+        <!-- 雙按鈕功能區：隱藏的輸入框 -->
+        <input type="file" id="photo-upload-camera" accept="image/*" capture="environment" style="display: none;">
+        <input type="file" id="photo-upload-gallery" accept="image/*" style="display: none;">
+
+        <!-- 雙按鈕功能區：顯示給使用者看的 UI -->
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+          <label for="photo-upload-camera" class="photo-btn" style="flex: 1; padding: 12px; background-color: var(--secondary-color); text-align: center; border-radius: 8px; font-weight: bold; color: var(--text-color);">📷 現場拍照</label>
+          <label for="photo-upload-gallery" class="photo-btn" style="flex: 1; padding: 12px; background-color: var(--secondary-color); text-align: center; border-radius: 8px; font-weight: bold; color: var(--text-color);">🖼️ 從相簿選</label>
+        </div>
+        
         <label for="photo-upload" class="custom-file-upload" id="photo-label">
           📸 拍攝帳單或戰利品
         </label>
